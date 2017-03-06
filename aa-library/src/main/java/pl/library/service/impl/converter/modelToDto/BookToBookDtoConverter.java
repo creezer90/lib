@@ -1,16 +1,26 @@
 package pl.library.service.impl.converter.modelToDto;
 
-import pl.library.DTO.Book;
-import pl.library.model.BookDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import pl.library.DTO.BookDTO;
+import pl.library.model.Book;
 import pl.library.service.ObjectConverter;
 
-public class BookToBookDtoConverter implements ObjectConverter<BookDTO, Book> {
+@Service
+public class BookToBookDtoConverter implements ObjectConverter<Book, BookDTO> {
+
+	@Autowired
+	AuthorToAuthorDtoConverter authorConverter;
 
 	@Override
-	public Book convert(BookDTO model) {
-		return Book.builder()//
-				.name(model.getName())//
+	public BookDTO convert(Book model) {
+		return BookDTO.builder()//
+				.id(model.getId())//
+				.title(model.getTitle())//
 				.author(model.getAuthor())//
+				// .authorId(model.getAuthor() != null ?
+				// model.getAuthor().getId() : null)//
 				.published(model.getPublished())//
 				.isbn(model.getIsbn()).build();
 	}

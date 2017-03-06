@@ -4,16 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.library.model.AuthorDTO;
+import pl.library.model.Author;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class BookDTO {
 
-	private String name;
-	private AuthorDTO author;
+	private Long id;
+	private String title;
+	private Author author;
 	private int published;
 	private String isbn;
 }

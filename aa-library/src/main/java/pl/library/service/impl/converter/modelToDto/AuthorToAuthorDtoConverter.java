@@ -1,19 +1,23 @@
 package pl.library.service.impl.converter.modelToDto;
 
+import org.springframework.stereotype.Service;
 
-import pl.library.DTO.Author;
-import pl.library.model.AuthorDTO;
+import pl.library.DTO.AuthorDTO;
+import pl.library.model.Author;
 import pl.library.service.ObjectConverter;
+import pl.library.util.DateUtil;
 
-public class AuthorToAuthorDtoConverter implements ObjectConverter<AuthorDTO, Author> {
+@Service
+public class AuthorToAuthorDtoConverter implements ObjectConverter<Author, AuthorDTO> {
 
 	@Override
-	public Author convert(AuthorDTO model) {
-		return Author.builder()//
+	public AuthorDTO convert(Author model) {
+		return AuthorDTO.builder()//
+				.id(model.getId())//
 				.name(model.getName())//
 				.surname(model.getSurname())//
-				.born(model.getBorn())//
-				.died(model.getDied())//
+				.born(DateUtil.formatTo_Y_M_D_date(model.getBorn()))//
+				.died(DateUtil.formatTo_Y_M_D_date(model.getDied()))//
 				.books(model.getBooks()).build();
 	}
 

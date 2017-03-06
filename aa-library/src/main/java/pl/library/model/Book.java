@@ -1,6 +1,9 @@
 package pl.library.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -14,12 +17,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDTO {
+public class Book {
 
-	private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Long id;
+	private String title;
 	@ManyToOne
 	@JoinColumn(name = "author_id")
-	private AuthorDTO author;
+	private Author author;
 	private int published;
 	private String isbn;
 
